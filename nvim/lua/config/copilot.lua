@@ -18,32 +18,6 @@ function M.setup()
   vim.keymap.set('i', '<C-]>', '<Plug>(copilot-next)', { desc = 'Next Copilot suggestion' })
   vim.keymap.set('i', '<C-[>', '<Plug>(copilot-previous)', { desc = 'Previous Copilot suggestion' })
 
-  -- Custom function to open chat on the right
-  local function toggle_copilot_chat()
-    local chat_bufnr = nil
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-      if vim.api.nvim_buf_get_name(buf):match('copilot%-chat') then
-        chat_bufnr = buf
-        break
-      end
-    end
-    
-    if chat_bufnr and vim.api.nvim_buf_is_loaded(chat_bufnr) then
-      -- Close if already open
-      local wins = vim.api.nvim_list_wins()
-      for _, win in ipairs(wins) do
-        if vim.api.nvim_win_get_buf(win) == chat_bufnr then
-          vim.api.nvim_win_close(win, false)
-          return
-        end
-      end
-    end
-    
-    -- Open chat on the right
-    vim.cmd('botright vsplit')
-    vim.cmd('CopilotChat')
-  end
-
   -- Copilot Chat commands
   vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' })
   vim.keymap.set('v', '<leader>cc', ':CopilotChatVisual<CR>', { desc = 'Copilot Chat with selection' })
