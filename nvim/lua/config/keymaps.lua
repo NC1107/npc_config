@@ -101,6 +101,8 @@ function M.setup()
   vim.keymap.set('n', '<leader>cw', ':CopilotChat @workspace<CR>', { desc = 'Chat with workspace context' })
   vim.keymap.set('n', '<leader>cx', ':CopilotChat @buffers<CR>', { desc = 'Chat with all buffers' })
 
+  -- Git keybindings are now in config/git.lua
+  
 end
 
 return M
